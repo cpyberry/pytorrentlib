@@ -85,6 +85,23 @@ class ParseTorrentFile:
 
 		return not bool(files)
 
+	def get_total_size(self) -> int:
+		"""Get Total size of delivered files
+
+		Returns:
+			int: total size of delivered files
+		"""
+		size = 0
+
+		if self.is_single_file():
+			size = self.content["info"]["length"]
+		else:
+			files = self.content["info"]["files"]
+			for file in files:
+				size += file["length"]
+
+		return size
+
 	@staticmethod
 	def load_torrent_file(path: str) -> dict:
 		"""Load torrent file so that it can be handled as dict type
