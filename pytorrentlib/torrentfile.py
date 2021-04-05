@@ -42,6 +42,26 @@ class ParseTorrentFile:
 			operation_value=DecodeTorrentFile.operation_value
 		)
 
+	def get_pieces(self) -> list:
+		""" Get pieces are stored sha1 hash
+
+		Piece is used to check the suitability of split data in torrent
+
+		Returns:
+			list: pieces are stored sha1 hash
+		"""
+		pieces = []
+
+		# sha1 hash is stored in units of 20 bytes
+		raw_pieces = self.content["info"]["pieces"]
+
+		raw_pieces_len = len(raw_pieces)
+
+		for index in range(0, raw_pieces_len, 20):
+			pieces.append(raw_pieces[index:index + 20])
+
+		return pieces
+
 	@staticmethod
 	def load_torrent_file(path: str) -> dict:
 		"""Load torrent file so that it can be handled as dict type
