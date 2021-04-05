@@ -62,6 +62,18 @@ class ParseTorrentFile:
 
 		return pieces
 
+	def get_info_hash(self) -> bytes:
+		"""Get sha1 hash of info
+
+		Sha1 hash of info is used when interacting with tracker etc
+
+		Returns:
+			bytes: sha1 hash of info
+		"""
+		info_bencode = pybencode.encode(self.raw_content[b"info"])
+		info_hash = hashlib.sha1(info_bencode).digest()
+		return info_hash
+
 	@staticmethod
 	def load_torrent_file(path: str) -> dict:
 		"""Load torrent file so that it can be handled as dict type
