@@ -74,6 +74,17 @@ class ParseTorrentFile:
 		info_hash = hashlib.sha1(info_bencode).digest()
 		return info_hash
 
+	def is_single_file(self) -> bool:
+		"""Find out if the file being delivered is single or multiple
+
+		Returns:
+			bool: If it is single file, True will be returned
+		"""
+		# If files being delivered is not single, there is ile in info
+		files = self.content["info"].get("files")
+
+		return not bool(files)
+
 	@staticmethod
 	def load_torrent_file(path: str) -> dict:
 		"""Load torrent file so that it can be handled as dict type
