@@ -14,6 +14,13 @@ class DecodeTorrentFile:
 	def operation_key(key: bytes, origin: dict, value: bytes) -> str:
 		return key.decode(ENCODING)
 
+	@staticmethod
+	def operation_value(value, origin: dict, key: bytes):
+		if (type(value) != bytes) or (key == b"pieces"):
+			return value
+		else:
+			return value.decode(ENCODING)
+
 
 class ParseTorrentFile:
 	"""Class for parsing torrent file
