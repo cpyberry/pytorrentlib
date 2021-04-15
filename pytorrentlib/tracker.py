@@ -1,3 +1,4 @@
+import requests
 from enum import Enum, auto
 
 
@@ -34,3 +35,28 @@ class Tracker:
 		self.info_hash = info_hash
 		self.peer_id = peer_id
 		self.headers = headers
+
+	def access(self, event: auto, uploaded: int, downloaded: int, left: int) -> bytes:
+		"""This is used to communicate with tracker
+
+		Args:
+			event (auto): attribute of EventStatus class
+			uploaded (int): amount uploaded
+			downloaded (int): amount downloaded
+			left (int): remaining amount
+
+		Returns:
+			bytes: response from tracker
+		"""
+		data = {
+			"info_hash": self.info_hash,
+			"port": self.peer_port,
+			"peer_id": self.peer_id,
+			"event": event.name.lower(),  # must be in lowercase instead of uppercase
+			"downloaded": downloaded,
+			"uploaded": uploaded,
+			"left": left
+		}
+
+		resp = requests.get(self.tracker_url, headers=self.headers, params=data)
+		return resp.content
