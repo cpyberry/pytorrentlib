@@ -65,3 +65,12 @@ class CreateMessage:
 			bytes: interest message
 		"""
 		return cls.create_message(MessageIdEnum.INTEREST)
+
+	@classmethod
+	def nointerest(cls) -> bytes:
+		"""Create nointerest message
+
+		Returns:
+			bytes: nointerest message
+		"""
+		return cls.create_message(MessageIdEnum.NOINTEREST)
