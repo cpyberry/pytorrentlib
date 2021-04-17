@@ -47,3 +47,12 @@ class CreateMessage:
 			bytes: choke message
 		"""
 		return cls.create_message(MessageIdEnum.CHOKE)
+
+	@classmethod
+	def unchoke(cls) -> bytes:
+		"""Create unchoke message
+
+		Returns:
+			bytes: unchoke message
+		"""
+		return cls.create_message(MessageIdEnum.UNCHOKE)
