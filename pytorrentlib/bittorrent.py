@@ -38,3 +38,12 @@ class CreateMessage:
 		empty = bytes(8)
 		handshake = ptstlen + ptsr + empty + info_hash + peer_id
 		return handshake
+
+	@classmethod
+	def choke(cls) -> bytes:
+		"""Create choke message
+
+		Returns:
+			bytes: choke message
+		"""
+		return cls.create_message(MessageIdEnum.CHOKE)
