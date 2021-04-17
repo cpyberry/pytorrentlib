@@ -56,3 +56,12 @@ class CreateMessage:
 			bytes: unchoke message
 		"""
 		return cls.create_message(MessageIdEnum.UNCHOKE)
+
+	@classmethod
+	def interest(cls) -> bytes:
+		"""Create interest message
+
+		Returns:
+			bytes: interest message
+		"""
+		return cls.create_message(MessageIdEnum.INTEREST)
