@@ -74,3 +74,16 @@ class CreateMessage:
 			bytes: nointerest message
 		"""
 		return cls.create_message(MessageIdEnum.NOINTEREST)
+
+	@classmethod
+	def have(cls, index: int) -> bytes:
+		"""Create have message
+
+		Args:
+			index (int): piece index
+
+		Returns:
+			bytes: have message
+		"""
+		data = struct.pack(">I", index)
+		return cls.create_message(MessageIdEnum.HAVE, data)
