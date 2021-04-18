@@ -87,3 +87,15 @@ class CreateMessage:
 		"""
 		data = struct.pack(">I", index)
 		return cls.create_message(MessageIdEnum.HAVE, data)
+
+	@classmethod
+	def bitfield(cls, bitfield: bytes) -> bytes:
+		"""Create bitfield message
+
+		Args:
+			bitfield (bytes): the bitfield that indicates whether you have each piece
+
+		Returns:
+			bytes: bitfield message
+		"""
+		return cls.create_message(MessageIdEnum.BITFIELD, bitfield)
