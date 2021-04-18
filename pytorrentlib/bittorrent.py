@@ -99,3 +99,18 @@ class CreateMessage:
 			bytes: bitfield message
 		"""
 		return cls.create_message(MessageIdEnum.BITFIELD, bitfield)
+
+	@classmethod
+	def request(cls, index: int, begin: int, length: int) -> bytes:
+		"""Create request message
+
+		Args:
+			index (int): piece index
+			begin (int): byte offset within the piece
+			length (int): requested length
+
+		Returns:
+			bytes: request message
+		"""
+		data = struct.pack(">3I", index, begin, length)
+		return cls.create_message(MessageIdEnum.REQUEST, data)
