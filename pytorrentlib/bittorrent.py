@@ -129,3 +129,18 @@ class CreateMessage:
 		"""
 		data = struct.pack(">2I", index, begin) + block_data
 		return cls.create_message(MessageIdEnum.PIECE, data)
+
+	@classmethod
+	def cancel(cls, index: int, begin: int, block_data: bytes) -> bytes:
+		"""Create cancel message
+
+		Args:
+			index (int): piece index
+			begin (int): byte offset within the piece
+			block_data (bytes): subset of the piece
+
+		Returns:
+			bytes: cancel message
+		"""
+		data = struct.pack(">2I", index, begin) + block_data
+		return cls.create_message(MessageIdEnum.CANCEL, data)
