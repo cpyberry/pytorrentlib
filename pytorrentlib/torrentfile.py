@@ -1,3 +1,13 @@
+"""
+Copyright 2021 cpyberry
+https://github.com/cpyberry/pytorrentlib
+
+cpyberry
+email: cpyberry222@gmail.com
+github: https://github.com/cpyberry
+"""
+
+
 import hashlib
 import pybencode
 import pytransform
