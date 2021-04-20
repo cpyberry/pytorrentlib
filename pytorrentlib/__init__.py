@@ -29,5 +29,6 @@ from .tracker import *
 __copyright__ = "Copyright 2021 cpyberry"
 __url__ = "https://github.com/cpyberry/pytorrentlib"
 __license__ = "Apache-2.0 License"
+__version__ = "1.0.0"
 __author__ = "cpyberry"
 __author_email__ = "cpyberry222@gmail.com"
