@@ -32,6 +32,16 @@ class CreateMessage:
 		return struct.pack(">IB", length, message_id.value) + data
 
 	@staticmethod
+	def keep_alive() -> bytes:
+		"""Create keep-alive message
+
+		Returns:
+			bytes: keep-alive message
+		"""
+		length = 0
+		return struct.pack(">I", length)
+
+	@staticmethod
 	def handshake(info_hash: bytes, peer_id: bytes) -> bytes:
 		"""Create handshake message
 
