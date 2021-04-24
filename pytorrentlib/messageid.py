@@ -23,6 +23,7 @@ class MessageIdFlag(Flag):
 	REQUEST = auto()  # 6
 	PIECE = auto()  # 7
 	CANCEL = auto()  # 8
+	PORT = auto()  # 9
 
 
 class MessageIdEnum(Enum):
@@ -37,3 +38,4 @@ class MessageIdEnum(Enum):
 	REQUEST = 6
 	PIECE = 7
 	CANCEL = 8
+	PORT = 9
