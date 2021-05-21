@@ -164,3 +164,16 @@ class CreateMessage:
 		"""
 		data = struct.pack(">2I", index, begin) + block_data
 		return cls.create_message(MessageIdEnum.CANCEL, data)
+
+	@classmethod
+	def port(cls, port: int) -> bytes:
+		"""Create port message
+
+		Args:
+			port (int): the port which the peer's DHT node is listening on
+
+		Returns:
+			bytes: port message
+		"""
+		data = struct.pack(">H", port)
+		return cls.create_message(MessageIdEnum.PORT, data)
