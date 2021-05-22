@@ -32,6 +32,16 @@ class CreateMessage:
 		return struct.pack(">IB", length, message_id.value) + data
 
 	@staticmethod
+	def keep_alive() -> bytes:
+		"""Create keep-alive message
+
+		Returns:
+			bytes: keep-alive message
+		"""
+		length = 0
+		return struct.pack(">I", length)
+
+	@staticmethod
 	def handshake(info_hash: bytes, peer_id: bytes) -> bytes:
 		"""Create handshake message
 
@@ -154,3 +164,16 @@ class CreateMessage:
 		"""
 		data = struct.pack(">2I", index, begin) + block_data
 		return cls.create_message(MessageIdEnum.CANCEL, data)
+
+	@classmethod
+	def port(cls, port: int) -> bytes:
+		"""Create port message
+
+		Args:
+			port (int): the port which the peer's DHT node is listening on
+
+		Returns:
+			bytes: port message
+		"""
+		data = struct.pack(">H", port)
+		return cls.create_message(MessageIdEnum.PORT, data)
