@@ -201,3 +201,12 @@ class BaseParse:
 		"""
 		length = struct.unpack_from(">I", self.message)[0]
 		return length
+
+	def get_message_id(self) -> int:
+		"""get the message id of bittorrent message
+
+		Returns:
+			int: message id
+		"""
+		message_id = struct.unpack_from(">IB", self.message)[1]
+		return message_id
