@@ -177,3 +177,18 @@ class CreateMessage:
 		"""
 		data = struct.pack(">H", port)
 		return cls.create_message(MessageIdEnum.PORT, data)
+
+
+class BaseParse:
+	"""base class of bittorrent protocol parser classes
+
+	Define the function to get the message length and message id.
+
+	Attributes:
+		message (bytes): raw bittorrent message
+		content (bytes): removed 5 bytes of data length and message id from bittorrent message
+	"""
+
+	def __init__(self, message: bytes):
+		self.message = message
+		self.content = message[5:]  # remove 5 bytes of data length and message id
