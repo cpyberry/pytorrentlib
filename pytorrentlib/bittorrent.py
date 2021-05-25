@@ -192,3 +192,12 @@ class BaseParse:
 	def __init__(self, message: bytes):
 		self.message = message
 		self.content = message[5:]  # remove 5 bytes of data length and message id
+
+	def get_message_length(self) -> int:
+		"""get the message length of bittorrent message
+
+		Returns:
+			int: message length
+		"""
+		length = struct.unpack_from(">I", self.message)[0]
+		return length
