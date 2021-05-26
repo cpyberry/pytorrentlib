@@ -210,3 +210,8 @@ class BaseParse:
 		"""
 		message_id = struct.unpack_from(">IB", self.message)[1]
 		return message_id
+
+
+class ParseHave(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
