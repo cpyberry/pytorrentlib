@@ -239,3 +239,8 @@ class ParseBitfield(BaseParse):
 			bytes: the bitfield
 		"""
 		return self.content
+
+
+class ParseRequest(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
