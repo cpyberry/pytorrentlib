@@ -215,3 +215,12 @@ class BaseParse:
 class ParseHave(BaseParse):
 	def __init__(self, message: bytes):
 		super().__init__(message)
+
+	def get_index(self) -> int:
+		"""get the piece index that has just been successfully downloaded and verified via the sha1 hash
+
+		Returns:
+			int: the piece index
+		"""
+		index = struct.unpack_from(">I", self.content)[0]
+		return index
