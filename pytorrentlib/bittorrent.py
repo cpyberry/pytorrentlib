@@ -224,3 +224,8 @@ class ParseHave(BaseParse):
 		"""
 		index = struct.unpack_from(">I", self.content)[0]
 		return index
+
+
+class ParseBitfield(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
