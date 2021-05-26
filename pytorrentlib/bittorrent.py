@@ -229,3 +229,13 @@ class ParseHave(BaseParse):
 class ParseBitfield(BaseParse):
 	def __init__(self, message: bytes):
 		super().__init__(message)
+
+	def get_bitfield(self) -> bytes:
+		"""get the bitfield
+
+		The high bit in the first byte corresponds to piece index 0.
+
+		Returns:
+			bytes: the bitfield
+		"""
+		return self.content
