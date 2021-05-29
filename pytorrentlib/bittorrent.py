@@ -244,3 +244,14 @@ class ParseBitfield(BaseParse):
 class ParseRequest(BaseParse):
 	def __init__(self, message: bytes):
 		super().__init__(message)
+
+	def get_index(self) -> int:
+		"""get the index
+
+		This is zero-based piece index.
+
+		Returns:
+			int: the index
+		"""
+		index = struct.unpack_from(">I", self.content)[0]
+		return index
