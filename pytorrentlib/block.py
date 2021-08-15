@@ -1,3 +1,6 @@
+import os
+
+
 class Block:
 	"""
 	This class manages torrent pieces.
@@ -13,3 +16,14 @@ class Block:
 		self.piece_dir_path = piece_dir_path
 		self.piece_length = len(piece_hash_list)
 		self.piece_status_list = [False] * self.piece_length
+
+	def get_piece_path(self, index: int) -> str:
+		"""Get the path that stores the piece.
+
+		Args:
+			index (int): piece index.
+
+		Returns:
+			str: path that stores the piece.
+		"""
+		return os.path.join(self.piece_dir_path, str(index))
