@@ -40,6 +40,20 @@ class Block:
 			data = f.read(size)
 		return data
 
+	def write(self, index: int, data: bytes, offset=0) -> None:
+		"""Write the specified piece.
+
+		Args:
+			index (int): piece index.
+			data (bytes): the data you want to write.
+			offset (int, optional): start position to write. Defaults to 0.
+		"""
+		path = self.get_piece_path(index)
+		# In a mode, even if you seek, it is written at the end.
+		with open(path, "r+b") as f:
+			f.seek(offset)
+			f.write(data)
+
 	def get_piece_path(self, index: int) -> str:
 		"""Get the path that stores the piece.
 
