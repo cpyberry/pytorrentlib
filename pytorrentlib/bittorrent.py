@@ -277,3 +277,8 @@ class ParseRequest(BaseParse):
 		"""
 		length = struct.unpack_from(">3I", self.content)[2]
 		return length
+
+
+class ParsePiece(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
