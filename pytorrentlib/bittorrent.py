@@ -313,3 +313,8 @@ class ParsePiece(BaseParse):
 		"""
 		block = self.content[8:]  # remove 8 bytes of index and begin
 		return block
+
+
+class ParseCancel(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
