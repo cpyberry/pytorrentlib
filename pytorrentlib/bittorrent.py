@@ -177,3 +177,191 @@ class CreateMessage:
 		"""
 		data = struct.pack(">H", port)
 		return cls.create_message(MessageIdEnum.PORT, data)
+
+
+class BaseParse:
+	"""base class of bittorrent protocol parser classes
+
+	Define the function to get the message length and message id.
+
+	Attributes:
+		message (bytes): raw bittorrent message
+		content (bytes): removed 5 bytes of data length and message id from bittorrent message
+	"""
+
+	def __init__(self, message: bytes):
+		self.message = message
+		self.content = message[5:]  # remove 5 bytes of data length and message id
+
+	def get_message_length(self) -> int:
+		"""get the message length of bittorrent message
+
+		Returns:
+			int: message length
+		"""
+		length = struct.unpack_from(">I", self.message)[0]
+		return length
+
+	def get_message_id(self) -> int:
+		"""get the message id of bittorrent message
+
+		Returns:
+			int: message id
+		"""
+		message_id = struct.unpack_from(">IB", self.message)[1]
+		return message_id
+
+
+class ParseHave(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
+
+	def get_index(self) -> int:
+		"""get the piece index that has just been successfully downloaded and verified via the sha1 hash
+
+		Returns:
+			int: the piece index
+		"""
+		index = struct.unpack_from(">I", self.content)[0]
+		return index
+
+
+class ParseBitfield(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
+
+	def get_bitfield(self) -> bytes:
+		"""get the bitfield
+
+		The high bit in the first byte corresponds to piece index 0.
+
+		Returns:
+			bytes: the bitfield
+		"""
+		return self.content
+
+
+class ParseRequest(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
+
+	def get_index(self) -> int:
+		"""get the index
+
+		This is zero-based piece index.
+
+		Returns:
+			int: the index
+		"""
+		index = struct.unpack_from(">I", self.content)[0]
+		return index
+
+	def get_begin(self) -> int:
+		"""get the begin
+
+		This is zero-based byte offset within the piece.
+
+		Returns:
+			int: the begin
+		"""
+		begin = struct.unpack_from(">2I", self.content)[1]
+		return begin
+
+	def get_length(self) -> int:
+		"""get the length
+
+		This is requested byte length.
+
+		Returns:
+			int: the length
+		"""
+		length = struct.unpack_from(">3I", self.content)[2]
+		return length
+
+
+class ParsePiece(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
+
+	def get_index(self) -> int:
+		"""get the index
+
+		This is zero-based piece index.
+
+		Returns:
+			int: the index
+		"""
+		index = struct.unpack_from(">I", self.content)[0]
+		return index
+
+	def get_begin(self) -> int:
+		"""get the begin
+
+		This is zero-based byte offset within the piece.
+
+		Returns:
+			int: the begin
+		"""
+		begin = struct.unpack_from(">2I", self.content)[1]
+		return begin
+
+	def get_block(self) -> bytes:
+		"""get a subset of the piece specified by index.
+
+		Returns:
+			bytes: subset of the piece.
+		"""
+		block = self.content[8:]  # remove 8 bytes of index and begin
+		return block
+
+
+class ParseCancel(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
+
+	def get_index(self) -> int:
+		"""get the index
+
+		This is zero-based piece index.
+
+		Returns:
+			int: the index
+		"""
+		index = struct.unpack_from(">I", self.content)[0]
+		return index
+
+	def get_begin(self) -> int:
+		"""get the begin
+
+		This is zero-based byte offset within the piece.
+
+		Returns:
+			int: the begin
+		"""
+		begin = struct.unpack_from(">2I", self.content)[1]
+		return begin
+
+	def get_length(self) -> int:
+		"""get the length
+
+		This is requested byte length.
+
+		Returns:
+			int: the length
+		"""
+		length = struct.unpack_from(">3I", self.content)[2]
+		return length
+
+
+class ParsePort(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
+
+	def get_listen_port(self) -> int:
+		"""Get the port the peer's DHT node is listening on.
+
+		Returns:
+			int: the port the peer's DHT node is listening on.
+		"""
+		port = struct.unpack(">H", self.content)[0]
+		return port
