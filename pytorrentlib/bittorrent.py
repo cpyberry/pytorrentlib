@@ -329,3 +329,14 @@ class ParseCancel(BaseParse):
 		"""
 		index = struct.unpack_from(">I", self.content)[0]
 		return index
+
+	def get_begin(self) -> int:
+		"""get the begin
+
+		This is zero-based byte offset within the piece.
+
+		Returns:
+			int: the begin
+		"""
+		begin = struct.unpack_from(">2I", self.content)[1]
+		return begin
