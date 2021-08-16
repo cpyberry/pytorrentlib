@@ -356,3 +356,12 @@ class ParseCancel(BaseParse):
 class ParsePort(BaseParse):
 	def __init__(self, message: bytes):
 		super().__init__(message)
+
+	def get_listen_port(self) -> int:
+		"""Get the port the peer's DHT node is listening on.
+
+		Returns:
+			int: the port the peer's DHT node is listening on.
+		"""
+		port = struct.unpack(">H", self.content)[0]
+		return port
