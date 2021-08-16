@@ -1,3 +1,4 @@
+import hashlib
 import os
 
 
@@ -53,6 +54,19 @@ class Block:
 		with open(path, "r+b") as f:
 			f.seek(offset)
 			f.write(data)
+
+	def is_completed(self, index: int) -> bool:
+		"""Check if the saved piece is compatible.
+
+		Args:
+			index (int): piece index.
+
+		Returns:
+			bool: return True if conforming, False otherwise.
+		"""
+		data = self.read(index)
+		data_hash = hashlib.sha1(data).digest()
+		return data_hash == self.piece_hash_list[index]
 
 	def get_piece_path(self, index: int) -> str:
 		"""Get the path that stores the piece.
