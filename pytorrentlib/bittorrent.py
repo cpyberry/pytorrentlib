@@ -304,3 +304,12 @@ class ParsePiece(BaseParse):
 		"""
 		begin = struct.unpack_from(">2I", self.content)[1]
 		return begin
+
+	def get_block(self) -> bytes:
+		"""get a subset of the piece specified by index.
+
+		Returns:
+			bytes: subset of the piece.
+		"""
+		block = self.content[8:]  # remove 8 bytes of index and begin
+		return block
