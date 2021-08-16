@@ -351,3 +351,8 @@ class ParseCancel(BaseParse):
 		"""
 		length = struct.unpack_from(">3I", self.content)[2]
 		return length
+
+
+class ParsePort(BaseParse):
+	def __init__(self, message: bytes):
+		super().__init__(message)
