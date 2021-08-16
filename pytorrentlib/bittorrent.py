@@ -340,3 +340,14 @@ class ParseCancel(BaseParse):
 		"""
 		begin = struct.unpack_from(">2I", self.content)[1]
 		return begin
+
+	def get_length(self) -> int:
+		"""get the length
+
+		This is requested byte length.
+
+		Returns:
+			int: the length
+		"""
+		length = struct.unpack_from(">3I", self.content)[2]
+		return length
