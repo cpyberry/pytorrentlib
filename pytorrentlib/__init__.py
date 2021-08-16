@@ -20,10 +20,10 @@ github: https://github.com/cpyberry
 """
 
 
-from .bittorrent import *
-from .messageid import *
-from .torrentfile import *
-from .tracker import *
+from .bittorrent import CreateMessage
+from .messageid import MessageIdFlag, MessageIdEnum
+from .torrentfile import ENCODING, ParseTorrentFile
+from .tracker import EventStatus, Tracker
 
 
 __copyright__ = "Copyright 2021 cpyberry"
