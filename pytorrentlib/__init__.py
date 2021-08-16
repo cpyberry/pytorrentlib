@@ -20,7 +20,16 @@ github: https://github.com/cpyberry
 """
 
 
-from .bittorrent import CreateMessage
+from .bittorrent import (
+	CreateMessage,
+	BaseParse,
+	ParseHave,
+	ParseBitfield,
+	ParseRequest,
+	ParsePiece,
+	ParseCancel,
+	ParsePort
+)
 from .messageid import MessageIdFlag, MessageIdEnum
 from .torrentfile import ENCODING, ParseTorrentFile
 from .tracker import EventStatus, Tracker
