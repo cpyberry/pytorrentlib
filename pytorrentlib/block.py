@@ -82,6 +82,16 @@ class Block:
 			self.piece_status_list[index] = completed
 		return self.piece_status_list[index]
 
+	def update_completed_list_all(self) -> list:
+		"""Check the suitability of all piece and update self.piece_status_list.
+
+		Returns:
+			list: return self.piece_status_list.
+		"""
+		for index in range(len(self.piece_status_list)):
+			self.update_completed_list_index(index)
+		return self.piece_status_list
+
 	def get_piece_path(self, index: int) -> str:
 		"""Get the path that stores the piece.
 
