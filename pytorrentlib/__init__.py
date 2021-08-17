@@ -30,6 +30,7 @@ from .bittorrent import (
 	ParseCancel,
 	ParsePort
 )
+from .block import Block
 from .messageid import MessageIdFlag, MessageIdEnum
 from .torrentfile import ENCODING, ParseTorrentFile
 from .tracker import EventStatus, Tracker
