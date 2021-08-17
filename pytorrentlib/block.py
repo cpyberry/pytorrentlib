@@ -68,6 +68,20 @@ class Block:
 		data_hash = hashlib.sha1(data).digest()
 		return data_hash == self.piece_hash_list[index]
 
+	def update_completed_list_index(self, index: int) -> bool:
+		"""Check the suitability of the specified piece and update self.piece_status_list.
+
+		Args:
+			index (int): piece index.
+
+		Returns:
+			bool: return True if conforming, False otherwise.
+		"""
+		if not self.piece_status_list[index]:
+			completed = self.is_completed(index)
+			self.piece_status_list[index] = completed
+		return self.piece_status_list[index]
+
 	def get_piece_path(self, index: int) -> str:
 		"""Get the path that stores the piece.
 
