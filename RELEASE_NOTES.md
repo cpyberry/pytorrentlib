@@ -1,5 +1,9 @@
 # Release Notes
 
+## v1.2.0
+
+* Added setup.py
+
 ## v1.1.1
 
 * Fix F403 violation in \_\_init\_\_.py

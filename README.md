@@ -15,6 +15,11 @@ The library has the following general features:
 * create bittorrent message
 * communicate with tracker
 
+## Install
+```python
+pip install pytorrentlib
+```
+
 ## Usage
 
 When you want to parse a torrent file, you can write:
