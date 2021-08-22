@@ -95,6 +95,14 @@ class ParseTorrentFile:
 
 		return not bool(files)
 
+	def get_tracker_announce_url(self) -> str:
+		"""Get the tracker announce url.
+
+		Returns:
+			str: the tracker announce url.
+		"""
+		return self.content["announce"]
+
 	def get_total_size(self) -> int:
 		"""Get Total size of delivered files
 
