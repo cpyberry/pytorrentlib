@@ -36,9 +36,12 @@ from .torrentfile import ENCODING, ParseTorrentFile
 from .tracker import EventStatus, Tracker
 
 
+__title__ = "pytorrentlib"
+__description__ = "Simple torrent library"
 __copyright__ = "Copyright 2021 cpyberry"
 __url__ = "https://github.com/cpyberry/pytorrentlib"
 __license__ = "Apache-2.0 License"
 __version__ = "1.1.1"
 __author__ = "cpyberry"
 __author_email__ = "cpyberry222@gmail.com"
+__python_requires__ = ">=3.6"
